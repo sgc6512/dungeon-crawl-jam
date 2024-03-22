@@ -1,0 +1,242 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmmdmtcjahfcj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kecet"]
+
+[sub_resource type="Sky" id="Sky_dv4cn"]
+sky_material = SubResource("ProceduralSkyMaterial_kecet")
+
+[sub_resource type="Environment" id="Environment_1jk81"]
+background_mode = 2
+sky = SubResource("Sky_dv4cn")
+ambient_light_sky_contribution = 0.5
+ssao_enabled = true
+ssao_radius = 0.5
+
+[sub_resource type="PrismMesh" id="PrismMesh_push2"]
+left_to_right = 1.0
+size = Vector3(2, 2, 2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q4frm"]
+radius = 0.3
+height = 1.6
+
+[node name="LevelTesting" type="Node3D"]
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.866025, 0.409576, 0.286789, 0, -0.573577, 0.819152, 0.5, -0.709406, -0.496732, 0, 7, 0)
+light_energy = 0.75
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(0.866025, -0.409576, -0.286789, 0, 0.573577, -0.819152, 0.5, 0.709406, 0.496732, 0, 6, 0)
+light_energy = 0.25
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_1jk81")
+
+[node name="Floor1" type="Node3D" parent="."]
+
+[node name="Room1" type="Node3D" parent="Floor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -5.4)
+
+[node name="Floor" type="CSGCombiner3D" parent="Floor1/Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
+use_collision = true
+
+[node name="Floor1" type="CSGBox3D" parent="Floor1/Room1/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, -0.6)
+size = Vector3(6, 1, 8)
+
+[node name="Floor2" type="CSGBox3D" parent="Floor1/Room1/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, -5.6)
+size = Vector3(2, 1, 2)
+
+[node name="Floor3" type="CSGBox3D" parent="Floor1/Room1/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -0.5, -3.6)
+size = Vector3(2, 1, 2)
+
+[node name="Walls" type="CSGCombiner3D" parent="Floor1/Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Floor1/Room1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, 0.4)
+size = Vector3(2, 2, 6)
+
+[node name="Wall3" type="CSGBox3D" parent="Floor1/Room1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 4.4)
+size = Vector3(10, 2, 2)
+
+[node name="Wall2" type="CSGBox3D" parent="Floor1/Room1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1, -0.6)
+size = Vector3(2, 2, 8)
+
+[node name="Wall4" type="CSGBox3D" parent="Floor1/Room1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, -5.6)
+size = Vector3(4, 2, 2)
+
+[node name="Wall5" type="CSGBox3D" parent="Floor1/Room1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1, -5.6)
+size = Vector3(4, 2, 2)
+
+[node name="Stairs1" type="CSGCombiner3D" parent="Floor1/Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 3.9)
+use_collision = true
+
+[node name="Step1" type="CSGBox3D" parent="Floor1/Room1/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0.4)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step2" type="CSGBox3D" parent="Floor1/Room1/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.2)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step3" type="CSGBox3D" parent="Floor1/Room1/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step4" type="CSGBox3D" parent="Floor1/Room1/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -0.2)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step5" type="CSGBox3D" parent="Floor1/Room1/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.4)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step6" type="CSGBox3D" parent="Floor1/Room1/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, -0.6)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step7" type="CSGBox3D" parent="Floor1/Room1/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.8)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step8" type="CSGBox3D" parent="Floor1/Room1/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step9" type="CSGBox3D" parent="Floor1/Room1/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, -1.2)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step10" type="CSGBox3D" parent="Floor1/Room1/Stairs1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -1.4)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Stairs2" type="CSGCombiner3D" parent="Floor1/Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1, 1.9)
+use_collision = true
+
+[node name="Step1" type="CSGBox3D" parent="Floor1/Room1/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0.4)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step2" type="CSGBox3D" parent="Floor1/Room1/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.2)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step3" type="CSGBox3D" parent="Floor1/Room1/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step4" type="CSGBox3D" parent="Floor1/Room1/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -0.2)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step5" type="CSGBox3D" parent="Floor1/Room1/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -0.4)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step6" type="CSGBox3D" parent="Floor1/Room1/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, -0.6)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step7" type="CSGBox3D" parent="Floor1/Room1/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.8)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step8" type="CSGBox3D" parent="Floor1/Room1/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, -1)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step9" type="CSGBox3D" parent="Floor1/Room1/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, -1.2)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Step10" type="CSGBox3D" parent="Floor1/Room1/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -1.4)
+size = Vector3(1.5, 0.1, 0.2)
+
+[node name="Slope" type="CSGCombiner3D" parent="Floor1/Room1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, -0.5)
+use_collision = true
+
+[node name="Slope1" type="CSGMesh3D" parent="Floor1/Room1/Slope"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, -0.0999999)
+mesh = SubResource("PrismMesh_push2")
+
+[node name="Hallway1" type="Node3D" parent="Floor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -11)
+
+[node name="Floor" type="CSGCombiner3D" parent="Floor1/Hallway1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
+use_collision = true
+
+[node name="Floor1" type="CSGBox3D" parent="Floor1/Hallway1/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.5, -2)
+size = Vector3(10, 1, 2)
+
+[node name="Walls" type="CSGCombiner3D" parent="Floor1/Hallway1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3)
+use_collision = true
+
+[node name="Wall1" type="CSGBox3D" parent="Floor1/Hallway1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -4)
+size = Vector3(10, 2, 2)
+
+[node name="RoomCylindrical1" type="Node3D" parent="Floor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+
+[node name="Floor" type="CSGCombiner3D" parent="Floor1/RoomCylindrical1"]
+use_collision = true
+
+[node name="Floor1" type="CSGCylinder3D" parent="Floor1/RoomCylindrical1/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, 0)
+radius = 3.0
+sides = 64
+
+[node name="Floor2" type="CSGBox3D" parent="Floor1/RoomCylindrical1/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 0)
+size = Vector3(1, 1, 2)
+
+[node name="Walls" type="CSGCombiner3D" parent="Floor1/RoomCylindrical1"]
+use_collision = true
+
+[node name="Wall1" type="CSGCylinder3D" parent="Floor1/RoomCylindrical1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+radius = 4.0
+sides = 64
+
+[node name="Wall2" type="CSGCylinder3D" parent="Floor1/RoomCylindrical1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+operation = 2
+radius = 3.0
+sides = 64
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Floor1/RoomCylindrical1/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 0)
+operation = 2
+size = Vector3(2, 2, 2)
+
+[node name="TestingCameras" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -3.4)
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="TestingCameras"]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -1.71866, 1.5, 4.40342)
+
+[node name="SampleEnemy" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -1.9)
+mesh = SubResource("CapsuleMesh_q4frm")
