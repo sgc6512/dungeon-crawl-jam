@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpy1tqa5ild8d"]
+[gd_scene load_steps=7 format=3 uid="uid://cpy1tqa5ild8d"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_jj5qa"]
+[ext_resource type="PackedScene" uid="uid://cmmdmtcjahfcj" path="res://Levels/level_testing.tscn" id="2_qak1x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hdpxq"]
 
@@ -40,3 +41,6 @@ shape = SubResource("BoxShape3D_u15jp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
 mesh = SubResource("BoxMesh_mp3br")
+
+[node name="LevelTesting" parent="." instance=ExtResource("2_qak1x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, 0)
