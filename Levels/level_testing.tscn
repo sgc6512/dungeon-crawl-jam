@@ -9,7 +9,6 @@ sky_material = SubResource("ProceduralSkyMaterial_kecet")
 background_mode = 2
 sky = SubResource("Sky_dv4cn")
 ambient_light_sky_contribution = 0.5
-ssao_enabled = true
 ssao_radius = 0.5
 
 [sub_resource type="PrismMesh" id="PrismMesh_push2"]

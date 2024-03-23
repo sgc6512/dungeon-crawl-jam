@@ -1,73 +1,81 @@
 class_name Player
 extends CharacterBody3D
+
 @onready var player = %Player
+@onready var animation_player = %AnimationPlayer
 @onready var moving:bool = false
-@onready var target_position:Vector2 = Vector2(100, 100)
-@onready var player_size:Vector3 = Vector3(1,1.5,1)
-@onready var camera_height:float = 1.5
+@onready var right_ray = %RightRay
+@onready var left_ray = %LeftRay
+@onready var up_ray = %UpRay
+@onready var down_ray = %DownRay
+
+# Exports
+@export var animation_time:float = 0.3
 
 # Controlled by tween
-var desired_position:Vector3 = Vector3.ZERO
+var desired_position:Vector3 = position
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
-func _physics_process(_delta):
-	# Accessing space required for Raycasts
-	var space_state = get_world_3d().direct_space_state
-	
+func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
-	# Decided to stick with tweening. We can handle going up slopes or falling down as edge cases
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction and !moving:
+	
+	if direction and !moving and check_wall_collision(input_dir):
 		var tween = create_tween()
 		moving = true
-		tween.tween_property(player, "desired_position", direction, 0.5).as_relative().set_trans(
+		tween.tween_property(player, "desired_position", direction * 2, animation_time).as_relative().set_trans(
 			Tween.TRANS_SINE)
+		animation_player.play("headbob")
 		tween.connect("finished", on_tween_finished)
 	
-	# Handle rotation
-	if Input.is_action_just_released("rotate_left") and !moving:
-		var tween = create_tween()
-		moving = true
-		tween.tween_property(player, "rotation_degrees:y", 90, 0.5).as_relative().set_trans(
-			Tween.TRANS_SINE)
-		tween.connect("finished", on_tween_finished)
-	if Input.is_action_just_released("rotate_right") and !moving:
-		var tween = create_tween()
-		moving = true
-		tween.tween_property(player, "rotation_degrees:y", -90, 0.5).as_relative().set_trans(
-			Tween.TRANS_SINE)
-		tween.connect("finished", on_tween_finished)
-	
-	var floor_raycast = check_floor(space_state)
-	if floor_raycast.has("collider"):
-		position.y = floor_raycast.position.y + camera_height
-	else:
-		position.y -= gravity * _delta
+	# Handle gravity
+	if !is_on_floor():
+		position.y -= gravity * delta
 	
 	# Snap to tween in X and Z axis
 	position.x = desired_position.x
 	position.z = desired_position.z
-	
-	# Potentially not needed as we are not using the velocity
-	# move_and_slide()
+
+	# Needed to work with is_on_floor method
+	move_and_slide()
+
+
+func _input(event):
+	# Handle rotation
+	if event.is_action_released("rotate_left") or event.is_action_released("rotate_right") and !moving:
+		var tween = create_tween()
+		moving = true
+		
+		var rot_deg = 90
+		if event.is_action("rotate_right"):
+			rot_deg = -90
+		
+		tween.tween_property(player, "rotation_degrees:y", rot_deg, animation_time).as_relative().set_trans(
+			Tween.TRANS_SINE)
+		tween.connect("finished", on_tween_finished)
 
 
 func on_tween_finished():
 	moving = false
 
 
-func check_floor(space):
-	# Create starting and target point of the ray, offset the target by small fraction
-	var origin_pos = global_position
-	var target_pos = global_position - Vector3(0, camera_height + 0.1, 0)
-	var floor_query = PhysicsRayQueryParameters3D.create(origin_pos, target_pos)
-	var floor_result = space.intersect_ray(floor_query)
-	
-	# Test for debugging
-	#print(floor_result.collider if floor_result.has("collider") else "Nothing")
-	
-	return floor_result
+func check_wall_collision(_input_dir:Vector2) -> bool:
+	# Should likely specify that the collision is a wall
+	match _input_dir:
+		Vector2(1, 0): # Right
+			if right_ray.is_colliding():
+				return false
+		Vector2(-1, 0): # Left
+			if left_ray.is_colliding():
+				return false
+		Vector2(0, 1): # Down
+			if down_ray.is_colliding():
+				return false
+		Vector2(0, -1): # Up
+			if up_ray.is_colliding():
+				return false
+	return true

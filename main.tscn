@@ -4,43 +4,62 @@
 [ext_resource type="PackedScene" uid="uid://cmmdmtcjahfcj" path="res://Levels/level_testing.tscn" id="2_qak1x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hdpxq"]
+size = Vector3(1, 2, 1)
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fwu1h"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_u15jp"]
+[sub_resource type="Animation" id="Animation_ddyh3"]
+resource_name = "headbob"
+length = 0.3
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.5, 0, 0.15, 1, 0, 0.4, 0, 0.3, 1, 0, 0.5, 0)
 
-[sub_resource type="BoxMesh" id="BoxMesh_mp3br"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7rvhf"]
+_data = {
+"headbob": SubResource("Animation_ddyh3")
+}
 
 [node name="Main" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, 0)
 script = ExtResource("1_jj5qa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("BoxShape3D_hdpxq")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 attributes = SubResource("CameraAttributesPractical_fwu1h")
 current = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.85012)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_7rvhf")
+}
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_u15jp")
+[node name="RightRay" type="RayCast3D" parent="Player"]
+unique_name_in_owner = true
+target_position = Vector3(2, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_mp3br")
+[node name="LeftRay" type="RayCast3D" parent="Player"]
+unique_name_in_owner = true
+target_position = Vector3(-2, 0, 0)
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
-transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 1.2677, -0.5, 0)
+[node name="UpRay" type="RayCast3D" parent="Player"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -2)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
-shape = SubResource("BoxShape3D_u15jp")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
-mesh = SubResource("BoxMesh_mp3br")
+[node name="DownRay" type="RayCast3D" parent="Player"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, 2)
 
 [node name="LevelTesting" parent="." instance=ExtResource("2_qak1x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, 0)
