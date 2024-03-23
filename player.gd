@@ -4,6 +4,10 @@ extends CharacterBody3D
 @onready var moving:bool = false
 @onready var target_position:Vector2 = Vector2(100, 100)
 @onready var player_size:Vector3 = Vector3(1,1.5,1)
+@onready var camera_height:float = 1.5
+
+# Controlled by tween
+var desired_position:Vector3 = Vector3.ZERO
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -20,7 +24,7 @@ func _physics_process(_delta):
 	if direction and !moving:
 		var tween = create_tween()
 		moving = true
-		tween.tween_property(player, "position", direction, 0.5).as_relative().set_trans(
+		tween.tween_property(player, "desired_position", direction, 0.5).as_relative().set_trans(
 			Tween.TRANS_SINE)
 		tween.connect("finished", on_tween_finished)
 	
@@ -40,9 +44,13 @@ func _physics_process(_delta):
 	
 	var floor_raycast = check_floor(space_state)
 	if floor_raycast.has("collider"):
-		position.y = floor_raycast.position.y + player_size.y
+		position.y = floor_raycast.position.y + camera_height
 	else:
 		position.y -= gravity * _delta
+	
+	# Snap to tween in X and Z axis
+	position.x = desired_position.x
+	position.z = desired_position.z
 	
 	# Potentially not needed as we are not using the velocity
 	# move_and_slide()
@@ -55,9 +63,11 @@ func on_tween_finished():
 func check_floor(space):
 	# Create starting and target point of the ray, offset the target by small fraction
 	var origin_pos = global_position
-	var target_pos = global_position - Vector3(0, player_size.y + 0.1, 0)
+	var target_pos = global_position - Vector3(0, camera_height + 0.1, 0)
 	var floor_query = PhysicsRayQueryParameters3D.create(origin_pos, target_pos)
 	var floor_result = space.intersect_ray(floor_query)
+	
 	# Test for debugging
 	#print(floor_result.collider if floor_result.has("collider") else "Nothing")
+	
 	return floor_result
