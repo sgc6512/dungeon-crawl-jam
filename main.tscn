@@ -1,65 +1,47 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpy1tqa5ild8d"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_jj5qa"]
-[ext_resource type="PackedScene" uid="uid://cmmdmtcjahfcj" path="res://Levels/level_testing.tscn" id="2_qak1x"]
+[ext_resource type="PackedScene" uid="uid://c0kkta0s1iqx5" path="res://Elements/Player/player.tscn" id="1_05e5w"]
+[ext_resource type="PackedScene" uid="uid://ctdbeis3oe38q" path="res://grid_map.tscn" id="2_31mlk"]
+[ext_resource type="Script" path="res://enemy.gd" id="3_brsd4"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hdpxq"]
-size = Vector3(1, 2, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hkns"]
+albedo_color = Color(0.945098, 0, 0.239216, 1)
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fwu1h"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1tuqb"]
+material = SubResource("StandardMaterial3D_8hkns")
 
-[sub_resource type="Animation" id="Animation_ddyh3"]
-resource_name = "headbob"
-length = 0.3
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.5, 0, 0.15, 1, 0, 0.4, 0, 0.3, 1, 0, 0.5, 0)
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7rvhf"]
-_data = {
-"headbob": SubResource("Animation_ddyh3")
-}
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ieo0d"]
 
 [node name="Main" type="Node3D"]
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_05e5w")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, 0)
-script = ExtResource("1_jj5qa")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 3, 9)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("BoxShape3D_hdpxq")
-
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-attributes = SubResource("CameraAttributesPractical_fwu1h")
-current = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+[node name="GridMap" parent="." instance=ExtResource("2_31mlk")]
 unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_7rvhf")
-}
 
-[node name="RightRay" type="RayCast3D" parent="Player"]
-unique_name_in_owner = true
-target_position = Vector3(2, 0, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.691866, -0.510844, 0.510255, -8.36752e-09, 0.706699, 0.707514, -0.722026, -0.489505, 0.488941, 4.4091, 15.0991, -1.02903)
+light_energy = 0.39
 
-[node name="LeftRay" type="RayCast3D" parent="Player"]
-unique_name_in_owner = true
-target_position = Vector3(-2, 0, 0)
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.990146, 0.0990783, -0.0989643, -0.0306937, 0.535969, 0.84368, 0.136632, 0.838404, -0.527646, 4.4091, 13.2948, 10.4432)
+light_energy = 0.39
 
-[node name="UpRay" type="RayCast3D" parent="Player"]
-unique_name_in_owner = true
-target_position = Vector3(0, 0, -2)
+[node name="Enemy" type="Area3D" parent="." node_paths=PackedStringArray("grid_map")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 15)
+script = ExtResource("3_brsd4")
+grid_map = NodePath("../GridMap")
 
-[node name="DownRay" type="RayCast3D" parent="Player"]
-unique_name_in_owner = true
-target_position = Vector3(0, 0, 2)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy"]
+mesh = SubResource("CapsuleMesh_1tuqb")
 
-[node name="LevelTesting" parent="." instance=ExtResource("2_qak1x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
+shape = SubResource("CapsuleShape3D_ieo0d")
+
+[node name="Timer" type="Timer" parent="Enemy"]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Enemy/Timer" to="Enemy" method="_on_timer_timeout"]

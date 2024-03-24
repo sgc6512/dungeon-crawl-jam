@@ -1,7 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-@onready var player = %Player
 @onready var animation_player = %AnimationPlayer
 @onready var moving:bool = false
 @onready var right_ray = %RightRay
@@ -13,10 +12,15 @@ extends CharacterBody3D
 @export var animation_time:float = 0.3
 
 # Controlled by tween
-var desired_position:Vector3 = position
+@onready var desired_position:Vector3 = position
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+
+func _ready():
+	if !is_in_group("player"):
+		add_to_group("player")
 
 
 func _physics_process(delta):
@@ -27,7 +31,7 @@ func _physics_process(delta):
 	if direction and !moving and check_wall_collision(input_dir):
 		var tween = create_tween()
 		moving = true
-		tween.tween_property(player, "desired_position", direction * 2, animation_time).as_relative().set_trans(
+		tween.tween_property(self, "desired_position", direction * 2, animation_time).as_relative().set_trans(
 			Tween.TRANS_SINE)
 		animation_player.play("headbob")
 		tween.connect("finished", on_tween_finished)
@@ -54,7 +58,7 @@ func _input(event):
 		if event.is_action("rotate_right"):
 			rot_deg = -90
 		
-		tween.tween_property(player, "rotation_degrees:y", rot_deg, animation_time).as_relative().set_trans(
+		tween.tween_property(self, "rotation_degrees:y", rot_deg, animation_time).as_relative().set_trans(
 			Tween.TRANS_SINE)
 		tween.connect("finished", on_tween_finished)
 
