@@ -52,6 +52,7 @@ func _ready():
 					astar.connect_points(point_origin, point_destination)
 				
 				# Based on the orientation add a plane as a connection
+				# This has a bug, check for z or x as well respectively
 				match orientation:
 					0, 10: # 0  : Right +X | 10 : Left -X
 						# Add planes to the right and left
@@ -67,7 +68,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -89,7 +90,7 @@ func _on_timer_timeout():
 	var origin_id = astar.get_closest_point(origin_position)
 	var target_id = astar.get_closest_point(target_position)
 	
-	var path = astar.get_point_path(origin_id, target_id).slice(1)
+	var path = astar.get_point_path(origin_id, target_id).slice(1, -1)
 	
 	if path.is_empty():
 		return

@@ -50,7 +50,7 @@ func _physics_process(delta):
 
 func _input(event):
 	# Handle rotation
-	if event.is_action_released("rotate_left") or event.is_action_released("rotate_right") and !moving:
+	if (event.is_action_pressed("rotate_left") or event.is_action_pressed("rotate_right")) and !moving:
 		var tween = create_tween()
 		moving = true
 		
