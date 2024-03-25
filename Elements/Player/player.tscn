@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0kkta0s1iqx5"]
+
+[ext_resource type="Script" path="res://Elements/Player/player.gd" id="1_qhdlo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hdpxq"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fwu1h"]
+
+[sub_resource type="Animation" id="Animation_ddyh3"]
+resource_name = "headbob"
+length = 0.3
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.5, 0, 0.15, 1, 0, 0.4, 0, 0.3, 1, 0, 0.5, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7rvhf"]
+_data = {
+"headbob": SubResource("Animation_ddyh3")
+}
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_qhdlo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_hdpxq")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+attributes = SubResource("CameraAttributesPractical_fwu1h")
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_7rvhf")
+}
+
+[node name="RightRay" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(2, 0, 0)
+
+[node name="LeftRay" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(-2, 0, 0)
+
+[node name="UpRay" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -2)
+
+[node name="DownRay" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, 2)

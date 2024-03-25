@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmmdmtcjahfcj"]
+[gd_scene load_steps=5 format=3 uid="uid://cmmdmtcjahfcj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kecet"]
 
@@ -14,10 +14,6 @@ ssao_radius = 0.5
 [sub_resource type="PrismMesh" id="PrismMesh_push2"]
 left_to_right = 1.0
 size = Vector3(2, 2, 2)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_q4frm"]
-radius = 0.3
-height = 1.6
 
 [node name="LevelTesting" type="Node3D"]
 
@@ -235,7 +231,3 @@ visible = false
 
 [node name="Camera3D" type="Camera3D" parent="TestingCameras"]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -1.71866, 1.5, 4.40342)
-
-[node name="SampleEnemy" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -1.9)
-mesh = SubResource("CapsuleMesh_q4frm")
