@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://cdo4y67p2jtai"]
+
+[ext_resource type="Script" path="res://Elements/Item/item.gd" id="1_4ulao"]
+[ext_resource type="PackedScene" uid="uid://c78ka0fcrmtfq" path="res://Elements/Item/test_item.tscn" id="1_7uhco"]
+[ext_resource type="Texture2D" uid="uid://dedvr1tfkuic8" path="res://icon.svg" id="1_osjxw"]
+
+[resource]
+script = ExtResource("1_4ulao")
+name = "Cube"
+scene = ExtResource("1_7uhco")
+icon = ExtResource("1_osjxw")

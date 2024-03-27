@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://buu7r04whnxk5"]
 
-[ext_resource type="Texture2D" uid="uid://kalu8iuvv62r" path="res://Assets/prototype blocks_texture_07.png" id="1_5eyf7"]
+[ext_resource type="Texture2D" uid="uid://kalu8iuvv62r" path="res://Assets/prototype blocks_texture_07.png" id="1_1ck2b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtnh7"]
 resource_name = "Material"
 cull_mode = 2
-albedo_texture = ExtResource("1_5eyf7")
+albedo_texture = ExtResource("1_1ck2b")
 roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_qqc0v"]

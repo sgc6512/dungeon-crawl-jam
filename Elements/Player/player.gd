@@ -16,6 +16,11 @@ extends CharacterBody3D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var inventory:Inventory = Inventory.new()
+
+
+func on_item_picked_up(item:Item):
+	inventory.add_item(item)
 
 
 func _ready():
