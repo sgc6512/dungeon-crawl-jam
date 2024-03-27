@@ -1,7 +1,6 @@
-[gd_scene load_steps=43 format=3 uid="uid://c3e4f3u3geit2"]
+[gd_scene load_steps=42 format=3 uid="uid://c3e4f3u3geit2"]
 
 [ext_resource type="ArrayMesh" uid="uid://k0m015ls8w0e" path="res://Assets/Models/Blocks/Meshes/Root Scene_Bridge.res" id="1_jf13d"]
-[ext_resource type="Script" path="res://Assets/Models/Blocks/scene_blocks_gridmap.gd" id="1_knqin"]
 [ext_resource type="ArrayMesh" uid="uid://dbu7sk86vyebg" path="res://Assets/Models/Blocks/Meshes/Root Scene_Cube.res" id="2_ax0j7"]
 [ext_resource type="ArrayMesh" uid="uid://cuesg3wa35h6d" path="res://Assets/Models/Blocks/Meshes/Root Scene_CubeCurvedCorner.res" id="3_isp8q"]
 [ext_resource type="ArrayMesh" uid="uid://yd637a03u2gu" path="res://Assets/Models/Blocks/Meshes/Root Scene_CubeCurvedEdge1.res" id="4_cn2ha"]
@@ -89,7 +88,6 @@ shadow_mesh = SubResource("ArrayMesh_0vs3h")
 size = Vector3(2, 0.1, 2.2)
 
 [node name="SceneBlocksGridmap" type="Node3D"]
-script = ExtResource("1_knqin")
 
 [node name="RootSceneBridge" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_jf13d")
