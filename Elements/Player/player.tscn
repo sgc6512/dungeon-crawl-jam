@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0kkta0s1iqx5"]
+[gd_scene load_steps=10 format=3 uid="uid://c0kkta0s1iqx5"]
 
 [ext_resource type="Script" path="res://Elements/Player/player.gd" id="1_qhdlo"]
+[ext_resource type="PackedScene" uid="uid://dbqws7h6o673b" path="res://Elements/Animations/slash_2d.tscn" id="2_ii7kq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hdpxq"]
 size = Vector3(1, 2, 1)
@@ -18,10 +19,70 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.5, 0, 0.15, 1, 0, 0.4, 0, 0.3, 1, 0, 0.5, 0)
 
+[sub_resource type="Animation" id="Animation_1k115"]
+resource_name = "block"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shield:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.636773, -0.321052, -0.775043), Vector3(-0.550436, -0.152476, -0.775043)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shield:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.269758)]
+}
+
+[sub_resource type="Animation" id="Animation_ayhsh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Shield:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.550436, -0.152476, -0.775043)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Shield:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7rvhf"]
 _data = {
+"RESET": SubResource("Animation_ayhsh"),
+"block": SubResource("Animation_1k115"),
 "headbob": SubResource("Animation_ddyh3")
 }
+
+[sub_resource type="QuadMesh" id="QuadMesh_h3h4x"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_qhdlo")
@@ -43,15 +104,33 @@ libraries = {
 [node name="RightRay" type="RayCast3D" parent="."]
 unique_name_in_owner = true
 target_position = Vector3(2, 0, 0)
+collide_with_areas = true
 
 [node name="LeftRay" type="RayCast3D" parent="."]
 unique_name_in_owner = true
 target_position = Vector3(-2, 0, 0)
+collide_with_areas = true
 
 [node name="UpRay" type="RayCast3D" parent="."]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -2)
+collide_with_areas = true
 
 [node name="DownRay" type="RayCast3D" parent="."]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, 2)
+collide_with_areas = true
+
+[node name="Slash2D" parent="." instance=ExtResource("2_ii7kq")]
+unique_name_in_owner = true
+
+[node name="Shield" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.636773, -0.321052, -0.775043)
+mesh = SubResource("QuadMesh_h3h4x")
+
+[node name="BlockTimer" type="Timer" parent="Shield"]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Shield/BlockTimer" to="." method="_on_block_timer_timeout"]

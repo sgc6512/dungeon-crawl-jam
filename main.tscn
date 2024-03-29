@@ -1,16 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpy1tqa5ild8d"]
 
 [ext_resource type="PackedScene" uid="uid://c0kkta0s1iqx5" path="res://Elements/Player/player.tscn" id="1_05e5w"]
-[ext_resource type="PackedScene" uid="uid://ctdbeis3oe38q" path="res://grid_map.tscn" id="2_31mlk"]
-[ext_resource type="Script" path="res://enemy.gd" id="3_brsd4"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hkns"]
-albedo_color = Color(0.945098, 0, 0.239216, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1tuqb"]
-material = SubResource("StandardMaterial3D_8hkns")
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ieo0d"]
+[ext_resource type="PackedScene" uid="uid://ctdbeis3oe38q" path="res://Levels/grid_map.tscn" id="2_31mlk"]
+[ext_resource type="PackedScene" uid="uid://b70vcfudppud0" path="res://Elements/Enemy/enemy.tscn" id="3_vdf84"]
+[ext_resource type="PackedScene" uid="uid://bywqr0d25fnme" path="res://Elements/pickup.tscn" id="4_rmmfr"]
+[ext_resource type="Script" path="res://UI/ui_root.gd" id="6_tdfe0"]
+[ext_resource type="PackedScene" uid="uid://nds8bdtljc43" path="res://UI/inventory_dialog.tscn" id="6_vi4ot"]
 
 [node name="Main" type="Node3D"]
 
@@ -29,19 +24,16 @@ light_energy = 0.39
 transform = Transform3D(-0.990146, 0.0990783, -0.0989643, -0.0306937, 0.535969, 0.84368, 0.136632, 0.838404, -0.527646, 4.4091, 13.2948, 10.4432)
 light_energy = 0.39
 
-[node name="Enemy" type="Area3D" parent="." node_paths=PackedStringArray("grid_map")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 15)
-script = ExtResource("3_brsd4")
+[node name="Enemy" parent="." node_paths=PackedStringArray("grid_map") instance=ExtResource("3_vdf84")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 15)
 grid_map = NodePath("../GridMap")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy"]
-mesh = SubResource("CapsuleMesh_1tuqb")
+[node name="Pickup" parent="." instance=ExtResource("4_rmmfr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.5, 13)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
-shape = SubResource("CapsuleShape3D_ieo0d")
+[node name="UIRoot" type="CanvasLayer" parent="."]
+script = ExtResource("6_tdfe0")
 
-[node name="Timer" type="Timer" parent="Enemy"]
-wait_time = 0.5
-autostart = true
-
-[connection signal="timeout" from="Enemy/Timer" to="Enemy" method="_on_timer_timeout"]
+[node name="InventoryDialog" parent="UIRoot" instance=ExtResource("6_vi4ot")]
+unique_name_in_owner = true
+visible = false
