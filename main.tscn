@@ -1,14 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpy1tqa5ild8d"]
+[gd_scene load_steps=7 format=3 uid="uid://cpy1tqa5ild8d"]
 
 [ext_resource type="PackedScene" uid="uid://c0kkta0s1iqx5" path="res://Elements/Player/player.tscn" id="1_05e5w"]
 [ext_resource type="PackedScene" uid="uid://ctdbeis3oe38q" path="res://Levels/grid_map.tscn" id="2_31mlk"]
 [ext_resource type="PackedScene" uid="uid://b70vcfudppud0" path="res://Elements/Enemy/enemy.tscn" id="3_vdf84"]
-[ext_resource type="Script" path="res://pickup.gd" id="4_2472w"]
-[ext_resource type="Resource" uid="uid://cdo4y67p2jtai" path="res://Elements/Item/test_item.tres" id="5_eaa8i"]
+[ext_resource type="PackedScene" uid="uid://bywqr0d25fnme" path="res://Elements/pickup.tscn" id="4_rmmfr"]
 [ext_resource type="Script" path="res://UI/ui_root.gd" id="6_tdfe0"]
 [ext_resource type="PackedScene" uid="uid://nds8bdtljc43" path="res://UI/inventory_dialog.tscn" id="6_vi4ot"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4uwau"]
 
 [node name="Main" type="Node3D"]
 
@@ -32,16 +29,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 15)
 visible = false
 grid_map = NodePath("../GridMap")
 
-[node name="Pickup" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.5, 13)
-script = ExtResource("4_2472w")
-item = ExtResource("5_eaa8i")
-
-[node name="Area3D" type="Area3D" parent="Pickup"]
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup/Area3D"]
-shape = SubResource("CapsuleShape3D_4uwau")
+[node name="Pickup" parent="." instance=ExtResource("4_rmmfr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.5, 13)
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
 script = ExtResource("6_tdfe0")
@@ -49,6 +38,3 @@ script = ExtResource("6_tdfe0")
 [node name="InventoryDialog" parent="UIRoot" instance=ExtResource("6_vi4ot")]
 unique_name_in_owner = true
 visible = false
-
-[connection signal="body_entered" from="Pickup/Area3D" to="Pickup" method="_on_area_3d_body_entered"]
-[connection signal="input_event" from="Pickup/Area3D" to="Pickup" method="_on_area_3d_input_event"]
