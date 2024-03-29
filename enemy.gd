@@ -10,17 +10,21 @@ func _ready():
 	
 	# Add points to AStar Map
 	var id_counter:int = 1
+	
+	# I changed match into If's with corresponding ID's
 	for pos in gridmap_cells:
 		# Based off the index on MeshLibrary
-		match grid_map.get_cell_item(pos):
-			0: # 0 : Plane
-				astar.add_point(encode_id(1, id_counter), pos)
-				id_counter += 1
-			1: # 1 : Incline
-				astar.add_point(encode_id(2, id_counter), pos)
-				id_counter += 1
-			2: # 2 : Cube
-				pass
+		var index = grid_map.get_cell_item(pos)
+		#grid_map.mesh_library.get_item_name() Alternative I wanted to try with match string, but not neccesairy.
+		
+		if index >= 10 and index <= 20: # 0 : Plane
+			astar.add_point(encode_id(1, id_counter), pos)
+			id_counter += 1
+		elif index >= 24 and index <= 33: # 1 : Slope or Stairs
+			astar.add_point(encode_id(2, id_counter), pos)
+			id_counter += 1
+		else: # 2 : Cube
+			pass
 	
 	# Connect points
 	for point_origin in astar.get_point_ids():
