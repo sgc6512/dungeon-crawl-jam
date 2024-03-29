@@ -48,7 +48,6 @@ func _ready():
 				# I don't know if these orientation values would be the same for any mesh
 				# Probably worth looking into changing it to use get_cell_item_basis instead
 				var orientation = grid_map.get_cell_item_orientation(pos_origin)
-				
 				# If adjacent inclines add them as a connection
 				# Note that orientation doesn't matter here as we shouldn't have inclines of different
 				# orientations adjacent to one another
@@ -56,18 +55,17 @@ func _ready():
 					astar.connect_points(point_origin, point_destination)
 				
 				# Based on the orientation add a plane as a connection
-				# This has a bug, check for z or x as well respectively
 				match orientation:
 					0, 10: # 0  : Right +X | 10 : Left -X
 						# Add planes to the right and left
-						if pos_origin.x == pos_destination.x + 1:
+						if pos_origin.z == pos_destination.z + 1 and pos_origin.x == pos_destination.x:
 							astar.connect_points(point_origin, point_destination)
-						if pos_origin.x == pos_destination.x - 1:
+						if pos_origin.z == pos_destination.z - 1 and pos_origin.x == pos_destination.x:
 							astar.connect_points(point_origin, point_destination)
 					16, 22: # 16 : Up -Z | 22 : Down +Z
-						if pos_origin.z == pos_destination.z + 1:
+						if pos_origin.x == pos_destination.x + 1 and pos_origin.z == pos_destination.z:
 							astar.connect_points(point_origin, point_destination)
-						if pos_origin.z == pos_destination.z - 1:
+						if pos_origin.x == pos_destination.x - 1 and pos_origin.z == pos_destination.z:
 							astar.connect_points(point_origin, point_destination)
 
 
