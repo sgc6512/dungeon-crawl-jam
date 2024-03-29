@@ -88,7 +88,6 @@ mesh = SubResource("PrismMesh_hlesl")
 shape = SubResource("CapsuleShape3D_ieo0d")
 
 [node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
 wait_time = 0.5
 autostart = true
 

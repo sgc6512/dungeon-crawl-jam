@@ -25,8 +25,7 @@ transform = Transform3D(-0.990146, 0.0990783, -0.0989643, -0.0306937, 0.535969, 
 light_energy = 0.39
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("grid_map") instance=ExtResource("3_vdf84")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 15)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 15)
 grid_map = NodePath("../GridMap")
 
 [node name="Pickup" parent="." instance=ExtResource("4_rmmfr")]

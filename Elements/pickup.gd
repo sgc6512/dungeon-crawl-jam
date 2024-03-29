@@ -18,7 +18,7 @@ func _on_area_3d_body_entered(body):
 		queue_free()
 
 
-func _on_area_3d_input_event(camera, event, _position, normal, shape_idx):
+func _on_area_3d_input_event(camera, event, _position, _normal, _shape_idx):
 	if event.button_mask == 1:
 		var distance_to:float = camera.global_position.distance_to(_position)
 		if distance_to < 2:

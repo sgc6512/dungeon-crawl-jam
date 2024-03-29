@@ -3,13 +3,18 @@ extends CharacterBody3D
 
 @onready var animation_player = %AnimationPlayer
 @onready var moving:bool = false
+@onready var blocking:bool = false
 @onready var right_ray = %RightRay
 @onready var left_ray = %LeftRay
 @onready var up_ray = %UpRay
 @onready var down_ray = %DownRay
+@onready var slash_2d = %Slash2D
+@onready var block_timer = %BlockTimer
 
 # Exports
 @export var animation_time:float = 0.3
+@export var damage:int = 5
+@export var health:int = 10
 
 # Controlled by tween
 @onready var desired_position:Vector3 = position
@@ -66,6 +71,26 @@ func _input(event):
 		tween.tween_property(self, "rotation_degrees:y", rot_deg, animation_time).as_relative().set_trans(
 			Tween.TRANS_SINE)
 		tween.connect("finished", on_tween_finished)
+	
+	# Handle attack
+	if event.is_action_pressed("attack") and !moving and !blocking:
+		# Delay between attacks
+		moving = true
+		slash_2d.play()
+		await get_tree().create_timer(0.3).timeout
+		moving = false
+		
+		# Check for hit
+		var col_obj:Object = check_collider_in_front()
+		if col_obj and col_obj.has_method("take_damage"):
+			col_obj.call("take_damage", damage)
+	
+	# Handle block
+	if event.is_action_pressed("block"):
+		animation_player.play("block")
+		blocking = true
+		block_timer.start()
+		#animation_player.play_backwards("block")
 
 
 func on_tween_finished():
@@ -88,3 +113,22 @@ func check_wall_collision(_input_dir:Vector2) -> bool:
 			if up_ray.is_colliding():
 				return false
 	return true
+
+
+func check_collider_in_front() -> Object:
+	return up_ray.get_collider()
+
+
+func take_damage(_damage:int):
+	if !blocking:
+		health -= _damage
+	else:
+		blocking = false
+		animation_player.play_backwards("block")
+	print(health)
+
+
+func _on_block_timer_timeout():
+	if blocking:
+		blocking = false
+		animation_player.play_backwards("block")

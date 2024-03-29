@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbqws7h6o673b"]
+
+[ext_resource type="Shader" uid="uid://bk0hsff0cpoy8" path="res://Elements/Animations/slash_shader.tres" id="1_dun2w"]
+[ext_resource type="Script" path="res://Elements/Animations/slash_2d.gd" id="1_p7ia7"]
+[ext_resource type="Texture2D" uid="uid://be8084a80ysoa" path="res://Assets/slash.png" id="2_mxggh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drd7a"]
+shader = ExtResource("1_dun2w")
+shader_parameter/FloatParameter = 0.94
+shader_parameter/FloatParameter2 = -0.24
+
+[sub_resource type="Animation" id="Animation_3ayi8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Slash:material:shader_parameter/FloatParameter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.555]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Slash:material:shader_parameter/FloatParameter2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.24]
+}
+
+[sub_resource type="Animation" id="Animation_bmxoq"]
+resource_name = "slash"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slash:material:shader_parameter/FloatParameter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0989786, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.94, 0.555, -0.03, -0.18]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Slash:material:shader_parameter/FloatParameter2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15924, 0.230641, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.24, 0.17, 0.41]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gpq4k"]
+_data = {
+"RESET": SubResource("Animation_3ayi8"),
+"slash": SubResource("Animation_bmxoq")
+}
+
+[node name="Slash2D" type="Node2D"]
+script = ExtResource("1_p7ia7")
+
+[node name="Slash" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_drd7a")
+position = Vector2(580, 435)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_mxggh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_gpq4k")
+}
