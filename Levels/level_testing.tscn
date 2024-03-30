@@ -2,12 +2,12 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kecet"]
 
-[sub_resource type="Sky" id="Sky_dv4cn"]
+[sub_resource type="Sky" id="Sky_w15hg"]
 sky_material = SubResource("ProceduralSkyMaterial_kecet")
 
 [sub_resource type="Environment" id="Environment_1jk81"]
 background_mode = 2
-sky = SubResource("Sky_dv4cn")
+sky = SubResource("Sky_w15hg")
 ambient_light_sky_contribution = 0.5
 ssao_radius = 0.5
 

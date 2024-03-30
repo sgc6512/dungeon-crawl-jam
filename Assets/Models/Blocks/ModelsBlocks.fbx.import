@@ -31,6 +31,14 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "materials": {
+"FleshFloor": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/FleshFloor/FleshFloor.material"
+},
+"FleshWall": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/FleshWall/FleshWall.material"
+},
 "Rock": {
 "use_external/enabled": true,
 "use_external/path": "res://Assets/Materials/Bricks/Bricks.material"
@@ -61,6 +69,16 @@ _subresources={
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_Cube.res"
 },
+"Root Scene_Cube1": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_Cube1.res"
+},
 "Root Scene_CubeCurvedCorner": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
@@ -70,6 +88,16 @@ _subresources={
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_CubeCurvedCorner.res"
+},
+"Root Scene_CubeCurvedCorner1": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_CubeCurvedCorner1.res"
 },
 "Root Scene_CubeCurvedEdge": {
 "generate/lightmap_uv": 0,
@@ -111,6 +139,16 @@ _subresources={
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_CubeDoorHalloway.res"
 },
+"Root Scene_CubeDoorHalloway1": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_CubeDoorHalloway1.res"
+},
 "Root Scene_CubeEdgeTwisted": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
@@ -120,6 +158,46 @@ _subresources={
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_CubeEdgeTwisted.res"
+},
+"Root Scene_CubeFlesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_CubeFlesh.res"
+},
+"Root Scene_CubeFleshSloped": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_CubeFleshSloped.res"
+},
+"Root Scene_CubeFleshWedge": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_CubeFleshWedge.res"
+},
+"Root Scene_CubeSphere": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_CubeSphere.res"
 },
 "Root Scene_CubeWindow": {
 "generate/lightmap_uv": 0,
@@ -170,6 +248,16 @@ _subresources={
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_PathFlat.res"
+},
+"Root Scene_PathFlesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_PathFlesh.res"
 },
 "Root Scene_PathHillCross": {
 "generate/lightmap_uv": 0,
@@ -330,6 +418,36 @@ _subresources={
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_SlopeConvex.res"
+},
+"Root Scene_SlopeCurved": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_SlopeCurved.res"
+},
+"Root Scene_SlopeFlesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_SlopeFlesh.res"
+},
+"Root Scene_SlopeFleshCorner": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/Models/Blocks/Meshes/Root Scene_SlopeFleshCorner.res"
 },
 "Root Scene_StairsFullCurved": {
 "generate/lightmap_uv": 0,

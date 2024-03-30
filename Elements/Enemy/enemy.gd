@@ -28,13 +28,13 @@ func _ready():
 	for pos in gridmap_cells:
 		# Based off the index on MeshLibrary
 		match grid_map.get_cell_item(pos):
-			0: # 0 : Plane
+			10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 39: # 0 : Plane
 				astar.add_point(encode_id(1, id_counter), pos)
 				id_counter += 1
-			1: # 1 : Incline
+			24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 41, 42: # 1 : Incline or Stairs
 				astar.add_point(encode_id(2, id_counter), pos)
 				id_counter += 1
-			2: # 2 : Cube
+			_: # 2 : Cube
 				pass
 	
 	# Connect points

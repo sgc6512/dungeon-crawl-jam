@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c3e4f3u3geit2"]
+[gd_scene load_steps=52 format=3 uid="uid://c3e4f3u3geit2"]
 
 [ext_resource type="ArrayMesh" uid="uid://k0m015ls8w0e" path="res://Assets/Models/Blocks/Meshes/Root Scene_Bridge.res" id="1_jf13d"]
 [ext_resource type="ArrayMesh" uid="uid://dbu7sk86vyebg" path="res://Assets/Models/Blocks/Meshes/Root Scene_Cube.res" id="2_ax0j7"]
@@ -33,6 +33,15 @@
 [ext_resource type="ArrayMesh" uid="uid://cqg1sb66sc711" path="res://Assets/Models/Blocks/Meshes/Root Scene_StairsHalfStraight.res" id="32_bucdc"]
 [ext_resource type="ArrayMesh" uid="uid://dw5yy36nck7mf" path="res://Assets/Models/Blocks/Meshes/Root Scene_SlopeConcave.res" id="33_j45y8"]
 [ext_resource type="ArrayMesh" uid="uid://efsjyldq7d8n" path="res://Assets/Models/Blocks/Meshes/Root Scene_SlopeConvex.res" id="34_x75fi"]
+[ext_resource type="ArrayMesh" uid="uid://dj334l1x3sq5k" path="res://Assets/Models/Blocks/Meshes/Root Scene_Cube1.res" id="34_ymb5y"]
+[ext_resource type="ArrayMesh" uid="uid://bsihrwfx75qfe" path="res://Assets/Models/Blocks/Meshes/Root Scene_CubeCurvedCorner1.res" id="35_81pvk"]
+[ext_resource type="ArrayMesh" uid="uid://bot8yel5lfyj8" path="res://Assets/Models/Blocks/Meshes/Root Scene_CubeFlesh.res" id="36_6nrub"]
+[ext_resource type="ArrayMesh" uid="uid://bdxqh1d8pi43d" path="res://Assets/Models/Blocks/Meshes/Root Scene_CubeFleshSloped.res" id="37_j6bau"]
+[ext_resource type="ArrayMesh" uid="uid://bmeqx27ysybde" path="res://Assets/Models/Blocks/Meshes/Root Scene_CubeFleshWedge.res" id="38_fk3vo"]
+[ext_resource type="ArrayMesh" uid="uid://drsjj5wrxaq0p" path="res://Assets/Models/Blocks/Meshes/Root Scene_PathFlesh.res" id="39_1re2m"]
+[ext_resource type="ArrayMesh" uid="uid://bg7m0tmr5gd6c" path="res://Assets/Models/Blocks/Meshes/Root Scene_CubeDoorHalloway1.res" id="40_y357w"]
+[ext_resource type="ArrayMesh" uid="uid://xjbe6s40au3x" path="res://Assets/Models/Blocks/Meshes/Root Scene_SlopeFleshCorner.res" id="41_n6m2k"]
+[ext_resource type="ArrayMesh" uid="uid://dyueb3rwiul1c" path="res://Assets/Models/Blocks/Meshes/Root Scene_SlopeFlesh.res" id="42_7okxm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h3sqw"]
 size = Vector3(2, 1, 2)
@@ -86,6 +95,9 @@ shadow_mesh = SubResource("ArrayMesh_0vs3h")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_42lv3"]
 size = Vector3(2, 0.1, 2.2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_iofgn"]
+points = PackedVector3Array(-1.00548, 0.0369476, -1.01587, 1.02548, 2.03687, 1.01587, 1.02548, 1.97323, 1.01587, 1.02548, 0.0369476, -1.01587, -0.942045, 0.00512695, 1.01587, 1.02548, 0.00512695, -0.952232, -1.00548, 0.0369476, 1.01587, 0.99386, 2.03687, 0.984052, -0.97386, 0.0687682, 1.01587, -0.97386, 0.0687682, -0.984052, 0.93043, 1.87797, 1.01587)
 
 [node name="SceneBlocksGridmap" type="Node3D"]
 
@@ -175,12 +187,6 @@ shape = SubResource("BoxShape3D_qe5pt")
 
 [node name="RootSceneCubeDoorHalloway" type="MeshInstance3D" parent="."]
 mesh = ExtResource("7_tdbdh")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneCubeDoorHalloway"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneCubeDoorHalloway/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_qe5pt")
 
 [node name="RootSceneCubeEdgeTwisted" type="MeshInstance3D" parent="."]
 mesh = ExtResource("8_wb7fg")
@@ -438,5 +444,81 @@ mesh = ExtResource("34_x75fi")
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneSlopeConvex/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -0.05)
+shape = SubResource("BoxShape3D_vh52n")
+
+[node name="RootSceneCube1" type="MeshInstance3D" parent="."]
+mesh = ExtResource("34_ymb5y")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneCube1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneCube1/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_qe5pt")
+
+[node name="RootSceneCubeCurvedCorner1" type="MeshInstance3D" parent="."]
+mesh = ExtResource("35_81pvk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneCubeCurvedCorner1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneCubeCurvedCorner1/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_qe5pt")
+
+[node name="RootSceneCubeFlesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("36_6nrub")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneCubeFlesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneCubeFlesh/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_qe5pt")
+
+[node name="RootSceneCubeFleshSloped" type="MeshInstance3D" parent="."]
+mesh = ExtResource("37_j6bau")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneCubeFleshSloped"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneCubeFleshSloped/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -0.05)
+shape = SubResource("BoxShape3D_vh52n")
+
+[node name="RootSceneCubeFleshWedge" type="MeshInstance3D" parent="."]
+mesh = ExtResource("38_fk3vo")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneCubeFleshWedge"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneCubeFleshWedge/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_qe5pt")
+
+[node name="RootScenePathFlesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("39_1re2m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootScenePathFlesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootScenePathFlesh/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("BoxShape3D_2pdp2")
+
+[node name="RootSceneCubeDoorHalloway1" type="MeshInstance3D" parent="."]
+mesh = ExtResource("40_y357w")
+
+[node name="RootSceneSlopeFleshCorner" type="MeshInstance3D" parent="."]
+mesh = ExtResource("41_n6m2k")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneSlopeFleshCorner"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneSlopeFleshCorner/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_iofgn")
+
+[node name="RootSceneSlopeFlesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("42_7okxm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneSlopeFlesh"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneSlopeFlesh/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -0.05)
 shape = SubResource("BoxShape3D_vh52n")
