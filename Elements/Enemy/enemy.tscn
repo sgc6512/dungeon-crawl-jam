@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b70vcfudppud0"]
+[gd_scene load_steps=10 format=3 uid="uid://b70vcfudppud0"]
 
 [ext_resource type="Script" path="res://Elements/Enemy/enemy.gd" id="1_l7p2n"]
+[ext_resource type="ArrayMesh" uid="uid://c34sh82mrrd0b" path="res://Assets/Charaters/Them/ThemMesh.res" id="2_d0a3k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hkns"]
 albedo_color = Color(0.945098, 0, 0.239216, 1)
@@ -11,6 +12,33 @@ material = SubResource("StandardMaterial3D_8hkns")
 [sub_resource type="PrismMesh" id="PrismMesh_hlesl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ieo0d"]
+
+[sub_resource type="Animation" id="Animation_daf2k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_5u3fw"]
 resource_name = "attack"
@@ -41,33 +69,6 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(-0.1, -0.1, 0), Vector3(0.5, 0.1, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_daf2k"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MeshInstance3D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3exel"]
 _data = {
 "RESET": SubResource("Animation_daf2k"),
@@ -78,11 +79,17 @@ _data = {
 script = ExtResource("1_l7p2n")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_1tuqb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-3.2565e-08, 0.745, 0, -0.745, -3.2565e-08, 0, 0, 0, 0.745, 0.504886, 0.405547, 0)
+visible = false
 mesh = SubResource("PrismMesh_hlesl")
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.49691e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.49691e-08, 0, 0.1, 0)
+mesh = ExtResource("2_d0a3k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ieo0d")
