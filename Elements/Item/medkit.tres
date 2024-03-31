@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_4ulao")
-name = "Cube"
+name = "Medkit"
 scene = ExtResource("2_f7ia6")
 icon = ExtResource("1_osjxw")
+details = "MEDPAK"

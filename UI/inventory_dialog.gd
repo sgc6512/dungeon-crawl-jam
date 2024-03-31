@@ -2,7 +2,8 @@ class_name InventoryDialog
 extends PanelContainer
 
 
-@onready var grid_container:GridContainer = %GridContainer
+@onready var item_list = %ItemList
+@onready var info = %Info
 
 @export var slot_scene:PackedScene
 
@@ -10,14 +11,17 @@ extends PanelContainer
 func open(inventory:Inventory):
 	show()
 	
-	for child in grid_container.get_children():
-		child.queue_free()
+	item_list.clear()
 	
 	for item in inventory.get_items():
-		var slot = slot_scene.instantiate()
-		grid_container.add_child(slot)
-		slot.display(item)
+		var index = item_list.add_item(item.name)
+		item_list.set_item_metadata(index, item)
 
 
 func _on_close_pressed():
 	hide()
+
+
+func _on_item_list_item_selected(index):
+	var item = item_list.get_item_metadata(index)
+	info.text = item.details

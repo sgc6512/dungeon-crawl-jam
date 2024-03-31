@@ -96,6 +96,8 @@ func encode_id(type:int, index:int) -> int:
 func _on_timer_timeout():
 	# Bug fixing note, local_to_map doesn't plot the right position if we are on an incline
 	# This fix works but there is probably a better way to do it
+	if astar.get_point_ids().size() == 0:
+		return
 	var target_position:Vector3i = grid_map.local_to_map(player.position)
 	var origin_position:Vector3 = grid_map.local_to_map(position)
 	
@@ -104,6 +106,7 @@ func _on_timer_timeout():
 	
 	var target_id = astar.get_closest_point(target_position)
 	var origin_id = astar.get_closest_point(origin_position)
+	
 	
 	var path = astar.get_id_path(origin_id, target_id).slice(1)
 	if path.is_empty():
@@ -170,12 +173,10 @@ func flank():
 	timer.stop()
 	var target_position:Vector3i = grid_map.local_to_map(player.position)
 	var origin_position:Vector3i = grid_map.local_to_map(position)
-	var target_id = astar.get_closest_point(target_position)
 	var origin_id = astar.get_closest_point(origin_position)
 
 	var possible_flanks:Array = []
 	var offset = target_position - origin_position
-	var check = false
 	# Based on offset check up down or left right
 	if offset.z == 1 or offset.z == -1:
 		for i in [-1,1]:

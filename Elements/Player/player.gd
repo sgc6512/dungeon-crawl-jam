@@ -27,10 +27,13 @@ var inventory:Inventory = Inventory.new()
 func on_item_picked_up(item:Item):
 	inventory.add_item(item)
 
-
 func _ready():
 	if !is_in_group("player"):
 		add_to_group("player")
+	var knife = load("res://Elements/Item/knife.tres")
+	var shield = load("res://Elements/Item/shield.tres")
+	inventory.add_item(knife)
+	inventory.add_item(shield)
 
 
 func _physics_process(delta):
@@ -79,7 +82,6 @@ func _input(event):
 		slash_2d.play()
 		await get_tree().create_timer(0.3).timeout
 		moving = false
-		
 		# Check for hit
 		var col_obj:Object = check_collider_in_front()
 		if col_obj and col_obj.has_method("take_damage"):
@@ -125,7 +127,6 @@ func take_damage(_damage:int):
 	else:
 		blocking = false
 		animation_player.play_backwards("block")
-	print(health)
 
 
 func _on_block_timer_timeout():

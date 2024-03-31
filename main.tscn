@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpy1tqa5ild8d"]
+[gd_scene load_steps=10 format=3 uid="uid://cpy1tqa5ild8d"]
 
 [ext_resource type="PackedScene" uid="uid://c0kkta0s1iqx5" path="res://Elements/Player/player.tscn" id="1_05e5w"]
 [ext_resource type="PackedScene" uid="uid://ctdbeis3oe38q" path="res://Levels/grid_map.tscn" id="2_31mlk"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bywqr0d25fnme" path="res://Elements/pickup.tscn" id="4_rmmfr"]
 [ext_resource type="Script" path="res://UI/ui_root.gd" id="6_tdfe0"]
 [ext_resource type="PackedScene" uid="uid://nds8bdtljc43" path="res://UI/inventory_dialog.tscn" id="6_vi4ot"]
+[ext_resource type="PackedScene" uid="uid://d2cjbqnkprhw5" path="res://UI/title_screen.tscn" id="7_p6xmg"]
+[ext_resource type="PackedScene" uid="uid://ext68e2ag61x" path="res://UI/health_bar.tscn" id="8_pbe6s"]
+[ext_resource type="PackedScene" uid="uid://d0tsrfl3ndvvn" path="res://game_over.tscn" id="9_uil88"]
 
 [node name="Main" type="Node3D"]
 
@@ -35,5 +38,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2.5, 13)
 script = ExtResource("6_tdfe0")
 
 [node name="InventoryDialog" parent="UIRoot" instance=ExtResource("6_vi4ot")]
+unique_name_in_owner = true
+visible = false
+
+[node name="TitleScreen" parent="UIRoot" instance=ExtResource("7_p6xmg")]
+unique_name_in_owner = true
+top_level = true
+
+[node name="HealthBar" parent="UIRoot" instance=ExtResource("8_pbe6s")]
+unique_name_in_owner = true
+visible = false
+
+[node name="GameOver" parent="UIRoot" instance=ExtResource("9_uil88")]
 unique_name_in_owner = true
 visible = false

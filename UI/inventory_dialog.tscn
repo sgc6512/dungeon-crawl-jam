@@ -19,25 +19,52 @@ size_flags_horizontal = 3
 script = ExtResource("1_n4hb8")
 slot_scene = ExtResource("2_bt0v3")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="HBoxContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="HBoxContainer/HBoxContainer2"]
 layout_mode = 2
+size_flags_horizontal = 6
 text = "Inventory"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-columns = 5
-
-[node name="Close" type="Button" parent="HBoxContainer"]
+[node name="Close" type="Button" parent="HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "X"
 
-[connection signal="pressed" from="HBoxContainer/Close" to="." method="_on_close_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="HBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 2
+item_0/text = "Knife"
+item_1/text = "Shield"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Info" type="Label" parent="HBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(422, 446)
+layout_mode = 2
+size_flags_vertical = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="HBoxContainer/HBoxContainer2/Close" to="." method="_on_close_pressed"]
+[connection signal="item_selected" from="HBoxContainer/HBoxContainer/VBoxContainer/ItemList" to="." method="_on_item_list_item_selected"]

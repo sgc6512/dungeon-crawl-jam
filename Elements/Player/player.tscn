@@ -8,16 +8,32 @@ size = Vector3(1, 2, 1)
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fwu1h"]
 
-[sub_resource type="Animation" id="Animation_ddyh3"]
-resource_name = "headbob"
-length = 0.3
-tracks/0/type = "position_3d"
+[sub_resource type="Animation" id="Animation_ayhsh"]
+length = 0.001
+tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera3D")
+tracks/0/enabled = false
+tracks/0/path = NodePath("Shield:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.5, 0, 0.15, 1, 0, 0.4, 0, 0.3, 1, 0, 0.5, 0)
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.550436, -0.152476, -0.775043)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Shield:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_1k115"]
 resource_name = "block"
@@ -48,32 +64,16 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, -0.269758)]
 }
 
-[sub_resource type="Animation" id="Animation_ayhsh"]
-length = 0.001
-tracks/0/type = "value"
+[sub_resource type="Animation" id="Animation_ddyh3"]
+resource_name = "headbob"
+length = 0.3
+tracks/0/type = "position_3d"
 tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("Shield:position")
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.550436, -0.152476, -0.775043)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("Shield:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.5, 0, 0.15, 1, 0, 0.4, 0, 0.3, 1, 0, 0.5, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7rvhf"]
 _data = {
