@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://js6cyn1jdwia"]
+
+[ext_resource type="Script" path="res://Elements/Interface/note.gd" id="1_or8bi"]
+[ext_resource type="PackedScene" uid="uid://2c00eo6u022j" path="res://Elements/Interface/interface_text.tscn" id="2_ogaml"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fyvax"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lw2hw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fewgj"]
+material = SubResource("StandardMaterial3D_lw2hw")
+size = Vector3(0.3, 0.4, 0.01)
+
+[node name="Note" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_or8bi")
+InterfaceToDisplay = ExtResource("2_ogaml")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_fyvax")
+
+[node name="PaperRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PaperRoot"]
+mesh = SubResource("BoxMesh_fewgj")
+skeleton = NodePath("../..")
+
+[node name="LabelFront" type="Label3D" parent="PaperRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.018424)
+text = "Note"
+font_size = 12
+outline_size = 2
+
+[node name="LabelBack" type="Label3D" parent="PaperRoot"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0.1, -0.013056)
+text = "Note"
+font_size = 12
+outline_size = 2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
