@@ -71,14 +71,14 @@ func _ready():
 				match orientation:
 					0, 10: # 0  : Right +X | 10 : Left -X
 						# Add planes to the right and left
-						if pos_origin.x == pos_destination.x + 1 and pos_origin.z == pos_destination.z:
-							astar.connect_points(point_origin, point_destination)
-						if pos_origin.x == pos_destination.x - 1 and pos_origin.z == pos_destination.z:
-							astar.connect_points(point_origin, point_destination)
-					16, 22: # 16 : Up -Z | 22 : Down +Z
 						if pos_origin.z == pos_destination.z + 1 and pos_origin.x == pos_destination.x:
 							astar.connect_points(point_origin, point_destination)
 						if pos_origin.z == pos_destination.z - 1 and pos_origin.x == pos_destination.x:
+							astar.connect_points(point_origin, point_destination)
+					16, 22: # 16 : Up -Z | 22 : Down +Z
+						if pos_origin.x == pos_destination.x + 1 and pos_origin.z == pos_destination.z:
+							astar.connect_points(point_origin, point_destination)
+						if pos_origin.x == pos_destination.x - 1 and pos_origin.z == pos_destination.z:
 							astar.connect_points(point_origin, point_destination)
 
 
