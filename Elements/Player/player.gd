@@ -87,6 +87,14 @@ func _input(event):
 		if col_obj and col_obj.has_method("take_damage"):
 			col_obj.call("take_damage", damage)
 	
+	# Handle heal
+	if event.is_action_pressed("heal"):
+		var items = inventory.get_items()
+		for item in items:
+			if item.name == "Medkit":
+				health = min(10, health + 5)
+				items.erase(item)
+	
 	# Handle block
 	if event.is_action_pressed("block"):
 		animation_player.play("block")
