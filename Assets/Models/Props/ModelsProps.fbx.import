@@ -38,6 +38,10 @@ _subresources={
 "Wood": {
 "use_external/enabled": true,
 "use_external/path": "res://Assets/Materials/Wood/Wood.material"
+},
+"Wood2": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/Wood2/Wood2.material"
 }
 },
 "meshes": {

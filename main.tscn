@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bywqr0d25fnme" path="res://Elements/pickup.tscn" id="4_rmmfr"]
 [ext_resource type="Script" path="res://UI/ui_root.gd" id="6_tdfe0"]
 [ext_resource type="PackedScene" uid="uid://nds8bdtljc43" path="res://UI/inventory_dialog.tscn" id="6_vi4ot"]
-[ext_resource type="PackedScene" uid="uid://d2cjbqnkprhw5" path="res://UI/title_screen.tscn" id="7_p6xmg"]
-[ext_resource type="PackedScene" uid="uid://ext68e2ag61x" path="res://UI/health_bar.tscn" id="8_pbe6s"]
-[ext_resource type="PackedScene" uid="uid://d0tsrfl3ndvvn" path="res://game_over.tscn" id="9_uil88"]
+[ext_resource type="PackedScene" path="res://UI/title_screen.tscn" id="7_p6xmg"]
+[ext_resource type="PackedScene" path="res://UI/health_bar.tscn" id="8_pbe6s"]
+[ext_resource type="PackedScene" path="res://game_over.tscn" id="9_uil88"]
 
 [node name="Main" type="Node3D"]
 

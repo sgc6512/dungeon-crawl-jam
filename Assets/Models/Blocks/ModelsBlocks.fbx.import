@@ -39,13 +39,33 @@ _subresources={
 "use_external/enabled": true,
 "use_external/path": "res://Assets/Materials/FleshWall/FleshWall.material"
 },
+"Ground": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/Ground/Ground.material"
+},
 "Rock": {
 "use_external/enabled": true,
 "use_external/path": "res://Assets/Materials/Bricks/Bricks.material"
 },
+"Roof": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/Roof/Wood2.material"
+},
+"RoofGreen": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/RoofGreen/Wood2.material"
+},
+"RoofYellow": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/RoofYellow/Wood2.material"
+},
 "Wood": {
 "use_external/enabled": true,
 "use_external/path": "res://Assets/Materials/Wood/Wood.material"
+},
+"Wood2": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/Materials/Wood2/Wood2.material"
 }
 },
 "meshes": {

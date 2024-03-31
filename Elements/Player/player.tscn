@@ -105,22 +105,26 @@ libraries = {
 
 [node name="RightRay" type="RayCast3D" parent="."]
 unique_name_in_owner = true
-target_position = Vector3(2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+target_position = Vector3(1, 0, 0)
 collide_with_areas = true
 
 [node name="LeftRay" type="RayCast3D" parent="."]
 unique_name_in_owner = true
-target_position = Vector3(-2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+target_position = Vector3(-1, 0, 0)
 collide_with_areas = true
 
 [node name="UpRay" type="RayCast3D" parent="."]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+target_position = Vector3(0, 0, -1)
 collide_with_areas = true
 
 [node name="DownRay" type="RayCast3D" parent="."]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+target_position = Vector3(0, 0, 1)
 collide_with_areas = true
 
 [node name="Slash2D" parent="." instance=ExtResource("2_ii7kq")]

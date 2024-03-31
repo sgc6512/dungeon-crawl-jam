@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Dream of the Dying"
-run/main_scene="res://main.tscn"
+run/main_scene="res://Levels/level_city.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/qodot/plugin.cfg")
 
 [input]
 

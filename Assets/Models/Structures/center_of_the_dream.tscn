@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://com0kccusx352"]
+
+[ext_resource type="PackedScene" uid="uid://byjhmbwpsyvjq" path="res://Assets/Models/Structures/CenterOfTheDream.fbx" id="1_plh4n"]
+[ext_resource type="Texture2D" uid="uid://xid7p4wt8bmw" path="res://Assets/Materials/Bricks/Bricks_BaseColor.png" id="2_v2yja"]
+[ext_resource type="Texture2D" uid="uid://cs5hxi82uwvog" path="res://Assets/Materials/Bricks/Bricks_Normal.png" id="3_qr60p"]
+[ext_resource type="Texture2D" uid="uid://dg1k1784l4aic" path="res://Assets/Materials/Bricks/Bricks_Roughness.png" id="4_qyi3f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oeb5n"]
+albedo_texture = ExtResource("2_v2yja")
+roughness_texture = ExtResource("4_qyi3f")
+normal_enabled = true
+normal_texture = ExtResource("3_qr60p")
+uv1_scale = Vector3(32, 32, 32)
+texture_filter = 0
+
+[node name="CenterOfTheDream" instance=ExtResource("1_plh4n")]
+
+[node name="CenterOfTheDream" parent="RootNode" index="0"]
+material_override = SubResource("StandardMaterial3D_oeb5n")

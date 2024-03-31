@@ -28,7 +28,7 @@ func _ready():
 	for pos in gridmap_cells:
 		# Based off the index on MeshLibrary
 		match grid_map.get_cell_item(pos):
-			10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 39: # 0 : Plane
+			10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 39, 43: # 0 : Plane
 				astar.add_point(encode_id(1, id_counter), pos)
 				id_counter += 1
 			24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 41, 42: # 1 : Incline or Stairs
@@ -165,7 +165,7 @@ func try_attack():
 	if attack_ray.is_colliding():
 		var coll:Object = attack_ray.get_collider()
 		if coll.has_method("take_damage"):
-			coll.call("take_damage", 5)
+			coll.call("take_damage", 2)
 	timer.start()
 
 
