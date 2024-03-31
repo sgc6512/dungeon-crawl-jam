@@ -16,4 +16,4 @@ func _on_open_doors_body_entered(body):
 		$LevelCity/DoorsRoot/RootSceneDoors.queue_free()
 		$LevelCity/DoorsRoot/RootSceneDoors2.queue_free()
 		$LevelCity/DoorsRoot/RootSceneDoors3.queue_free()
-		self.visible = false
+		$OpenDoors.visible = false
